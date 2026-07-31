@@ -1,57 +1,59 @@
 import React from 'react';
-import { Search, Menu, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from './ThemeToggle';
 
 const navItems = [
-  { name: 'Home', path: '/', active: true },
+  { name: 'ഹോം', path: '/', active: true },
   { 
-    name: 'News & Views',
+    name: 'വാർത്തകളും കാഴ്ചകളും',
     path: '/news',
     dropdown: [
-      { name: 'Kerala', path: '/news/kerala' }, 
-      { name: 'National', path: '/news/national' }, 
-      { name: 'International', path: '/news/international' }, 
-      { name: 'Obituary', path: '/obituary' }, 
-      { name: 'Article & Editorial', path: '/news/article' }
+      { name: 'കേരളം', path: '/news/kerala' }, 
+      { name: 'ദേശീയം', path: '/news/national' }, 
+      { name: 'അന്തർദേശീയം', path: '/news/international' }, 
+      { name: 'ചരമം', path: '/obituary' }, 
+      { name: 'ലേഖനങ്ങളും മുഖപ്രസംഗങ്ങളും', path: '/news/article' }
     ] 
   },
   { 
-    name: 'Matrimony',
+    name: 'വിവാഹം',
     path: '/matrimony',
     dropdown: [
-      { name: 'All', path: '/matrimony' }, 
-      { name: 'Wanted Brides', path: '/matrimony?type=bride' }, 
-      { name: 'Wanted Grooms', path: '/matrimony?type=groom' }
+      { name: 'എല്ലാം', path: '/matrimony' }, 
+      { name: 'വധുവിനെ ആവശ്യമുണ്ട്', path: '/matrimony?type=bride' }, 
+      { name: 'വരനെ ആവശ്യമുണ്ട്', path: '/matrimony?type=groom' }
     ] 
   },
   { 
-    name: 'Classifieds',
+    name: 'പരസ്യങ്ങൾ',
     path: '/classifieds',
     dropdown: [
-      { name: 'Buy & Sell', path: '/classifieds' }, 
-      { name: 'Rentals', path: '/classifieds' }, 
-      { name: 'Real Estate', path: '/classifieds' }, 
-      { name: 'Vehicles', path: '/classifieds' }
+      { name: 'വാങ്ങലും വിൽക്കലും', path: '/classifieds' }, 
+      { name: 'വാടകയ്ക്ക്', path: '/classifieds' }, 
+      { name: 'റിയൽ എസ്റ്റേറ്റ്', path: '/classifieds' }, 
+      { name: 'വാഹനങ്ങൾ', path: '/classifieds' }
     ] 
   },
   { 
-    name: 'Topics',
+    name: 'വിഷയങ്ങൾ',
     path: '/topics',
     dropdown: [
-      { name: 'Kidz', path: '/topics/kidz' }, 
-      { name: 'Youth', path: '/topics/youth' }, 
-      { name: 'Women', path: '/topics/women' }, 
-      { name: 'Success Stories', path: '/topics/success' }
+      { name: 'കുട്ടികൾ', path: '/topics/kidz' }, 
+      { name: 'യുവജനങ്ങൾ', path: '/topics/youth' }, 
+      { name: 'വനിതകൾ', path: '/topics/women' }, 
+      { name: 'വിജയഗാഥകൾ', path: '/topics/success' }
     ] 
   },
-  { name: 'About Us', path: '/about' }
+  { name: 'ഞങ്ങളെക്കുറിച്ച്', path: '/about' }
 ];
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container navbar-container">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo notranslate">
           <span style={{ fontSize: '2rem' }}>✜</span> GoodNews
         </Link>
         <ul className="nav-links">
@@ -72,9 +74,9 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="nav-actions">
-          <button><Search size={20} /></button>
-          <button><Menu size={24} /></button>
+        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <ThemeToggle />
+          <LanguageSwitcher />
         </div>
       </div>
     </nav>
