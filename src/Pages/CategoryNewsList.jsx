@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getFilteredNewsData } from '../Services/UserServices';
 import { extractContent } from './Dashboard';
 import moment from 'moment';
@@ -57,7 +57,18 @@ const CategoryNewsList = () => {
             {filteredNews.map(news => {
               const { image, description } = extractContent(news.content);
               return (
-                <div key={news._id} className="latest-small-card" style={{ gridTemplateColumns: '250px 1fr', padding: '1.5rem' }}>
+                <Link
+                  key={news._id}
+                  to={`/news/${encodeURIComponent(categoryName || news.categoryName || 'news')}/${encodeURIComponent(news.slug)}`}
+                  className="latest-small-card"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '250px 1fr',
+                    padding: '1.5rem',
+                    textDecoration: 'none',
+                    color: 'inherit'
+                  }}
+                >
                   <img src={image} alt={news.title} style={{ width: '250px', height: '200px' }} />
                   <div className="latest-small-card-content" style={{ justifyContent: 'center', gap: '0.75rem' }}>
                     <div className="author-info" style={{ marginBottom: '0' }}>
@@ -73,7 +84,7 @@ const CategoryNewsList = () => {
                       <span style={{ color: 'var(--text-tertiary)' }}>{news.viewsCount} views</span>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

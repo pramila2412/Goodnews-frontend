@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, Play, Clock } from 'lucide-react';
 import parse from 'html-react-parser';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import { 
   latestHomeThreeNews, 
@@ -94,7 +95,7 @@ const Dashboard = () => {
       <main className="container main-content animate-fade-in">
         {heroNews && (
           <section className="hero-grid">
-            <div className="hero-main">
+            <Link to={`/news/${encodeURIComponent(heroNews.categoryName || 'news')}/${encodeURIComponent(heroNews.slug)}`} className="hero-main" style={{ textDecoration: 'none', color: 'inherit' }}>
               <img src={extractContent(heroNews.content).image} alt={heroNews.title} />
               <div className="hero-overlay">
                 <div className="flex items-center gap-4">
@@ -103,7 +104,7 @@ const Dashboard = () => {
                 </div>
                 <h2>{heroNews.title}</h2>
               </div>
-            </div>
+            </Link>
             
             <div className="side-news">
               {sideNews.map(news => {

@@ -9,6 +9,7 @@ import AboutUs from './Pages/AboutUs';
 import Matrimony from './Pages/Matrimony';
 import Topics from './Pages/Topics';
 import CategoryNewsList from './Pages/CategoryNewsList';
+import NewsDetail from './Pages/NewsDetail';
 
 // A simple generic placeholder for routes we haven't built out fully yet
 const ComingSoon = ({ title }) => (
@@ -38,6 +39,7 @@ function App() {
         
         {/* News & Views Categories */}
         <Route path="/news" element={<CategoryNewsList />} />
+        <Route path="/news/:category/:slug" element={<NewsDetail />} />
         <Route path="/news/:category" element={<CategoryNewsList />} />
         <Route path="/obituary" element={<CategoryNewsList />} />
         

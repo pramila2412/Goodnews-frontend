@@ -31,3 +31,7 @@ export const getFilterMatrimonyNewsData = (type) => {
 export const getFilterTopicData = (type) => {
     return api.get(`/home/topic-type?topicType=${type}`);
 };
+
+export const getNewsBySlug = (slug) => {
+    return api.get(`/news/getNewsBySlug/${encodeURIComponent(slug)}`);
+};
