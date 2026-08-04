@@ -110,7 +110,12 @@ const Dashboard = () => {
               {sideNews.map(news => {
                 const { image, description } = extractContent(news.content);
                 return (
-                  <div key={news._id} className="side-news-item">
+                  <Link
+                    key={news._id}
+                    to={`/news/${encodeURIComponent(news.categoryName || 'news')}/${encodeURIComponent(news.slug)}`}
+                    className="side-news-item"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
                     <img src={image} alt={news.title} />
                     <div className="side-news-content">
                       <div className="author-info">
@@ -119,7 +124,7 @@ const Dashboard = () => {
                       <h4>{news.title}</h4>
                       <p>{description}</p>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -136,7 +141,12 @@ const Dashboard = () => {
               {groupedCategory[cat1].slice(0, 4).map(news => {
                 const { image, description } = extractContent(news.content);
                 return (
-                  <div key={news._id} className="news-card">
+                  <Link
+                    key={news._id}
+                    to={`/news/${encodeURIComponent(news.categoryName || 'news')}/${encodeURIComponent(news.slug)}`}
+                    className="news-card"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
                     <div className="news-card-img-wrapper">
                       <img src={image} alt={news.title} />
                     </div>
@@ -150,7 +160,7 @@ const Dashboard = () => {
                     <div className="card-footer">
                       <span>{news.viewsCount} views</span>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -183,7 +193,12 @@ const Dashboard = () => {
                 {groupedCategory[cat2].slice(1, 4).map(news => {
                   const { image } = extractContent(news.content);
                   return (
-                    <div key={news._id} className="latest-small-card">
+                    <Link
+                      key={news._id}
+                      to={`/news/${encodeURIComponent(news.categoryName || 'news')}/${encodeURIComponent(news.slug)}`}
+                      className="latest-small-card"
+                      style={{ textDecoration: 'none', color: 'inherit' }}
+                    >
                       <img src={image} alt={news.title} />
                       <div className="latest-small-card-content">
                         <div className="author-info" style={{ marginBottom: '0' }}>
@@ -193,7 +208,7 @@ const Dashboard = () => {
                         </div>
                         <h4>{news.title}</h4>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -218,7 +233,12 @@ const Dashboard = () => {
                   {groupedCategory[cat3].slice(0, 3).map(news => {
                     const { image, description } = extractContent(news.content);
                     return (
-                      <div key={news._id} className="video-card">
+                      <Link
+                        key={news._id}
+                        to={`/news/${encodeURIComponent(news.categoryName || 'news')}/${encodeURIComponent(news.slug)}`}
+                        className="video-card"
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                      >
                         <div className="video-thumbnail">
                           <img src={image} alt={news.title} />
                           <button className="play-btn">
@@ -235,7 +255,7 @@ const Dashboard = () => {
                             <span className="text-accent font-semibold">{news.categoryName}</span>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>
@@ -263,7 +283,12 @@ const Dashboard = () => {
               {groupedCategory[cat4].slice(0, 4).map(news => {
                 const { image, description } = extractContent(news.content);
                 return (
-                  <div key={news._id} className="news-card">
+                  <Link
+                    key={news._id}
+                    to={`/news/${encodeURIComponent(news.categoryName || 'news')}/${encodeURIComponent(news.slug)}`}
+                    className="news-card"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
                     <div className="news-card-img-wrapper">
                       <img src={image} alt={news.title} />
                     </div>
@@ -274,7 +299,7 @@ const Dashboard = () => {
                     </div>
                     <h3>{news.title}</h3>
                     <p>{description}</p>
-                  </div>
+                  </Link>
                 );
               })}
             </div>

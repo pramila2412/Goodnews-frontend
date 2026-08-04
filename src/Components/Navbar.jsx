@@ -30,10 +30,10 @@ const navItems = [
     name: 'പരസ്യങ്ങൾ',
     path: '/classifieds',
     dropdown: [
-      { name: 'വാങ്ങലും വിൽക്കലും', path: '/classifieds' }, 
-      { name: 'വാടകയ്ക്ക്', path: '/classifieds' }, 
-      { name: 'റിയൽ എസ്റ്റേറ്റ്', path: '/classifieds' }, 
-      { name: 'വാഹനങ്ങൾ', path: '/classifieds' }
+      { name: 'വാങ്ങലും വിൽക്കലും', path: '/classifieds/buy-sell' }, 
+      { name: 'വാടകയ്ക്ക്', path: '/classifieds/rent' }, 
+      { name: 'റിയൽ എസ്റ്റേറ്റ്', path: '/classifieds/real-estate' }, 
+      { name: 'വാഹനങ്ങൾ', path: '/classifieds/vehicles' }
     ] 
   },
   { 

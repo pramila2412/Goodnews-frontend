@@ -42,9 +42,10 @@ function App() {
         <Route path="/news/:category/:slug" element={<NewsDetail />} />
         <Route path="/news/:category" element={<CategoryNewsList />} />
         <Route path="/obituary" element={<CategoryNewsList />} />
+        <Route path="/classifieds" element={<CategoryNewsList />} />
+        <Route path="/classifieds/:type" element={<CategoryNewsList />} />
         
         {/* Other navigation links from Header/Footer */}
-        <Route path="/classifieds" element={<ComingSoon title="Classifieds" />} />
         <Route path="/contact" element={<ComingSoon title="Contact Us" />} />
         <Route path="/privacy" element={<ComingSoon title="Privacy Policy" />} />
         <Route path="/terms" element={<ComingSoon title="Terms of Service" />} />

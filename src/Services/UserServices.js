@@ -21,7 +21,11 @@ export const getAllBox = () => {
 };
 
 export const getFilteredNewsData = (data) => {
-    return api.get(`/home/latest-FilteredNews?categoryName=${data?.categoryName}&type=${data?.type}&count=${data?.count}`);
+    const params = new URLSearchParams();
+    if (data?.categoryName) params.append('categoryName', data.categoryName);
+    if (data?.type) params.append('type', data.type);
+    if (data?.count) params.append('count', data.count);
+    return api.get(`/home/latest-FilteredNews?${params.toString()}`);
 };
 
 export const getFilterMatrimonyNewsData = (type) => {

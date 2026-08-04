@@ -6,9 +6,33 @@ import moment from 'moment';
 
 const CategoryNewsList = () => {
   const { pathname } = useLocation();
-  // Extract category from URL if it's /news/:category or fallback to Main if just /news
+  // Handle /news/:category, /news, /classifieds, and /classifieds/:type
   const categoryParam = pathname.split('/').pop();
-  const categoryName = categoryParam === 'news' ? '' : (categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1));
+  const isClassifieds = pathname.startsWith('/classifieds');
+  const isNewsRoot = pathname === '/news';
+
+  const classifiedsCategoryMap = {
+    'buy-sell': 'Buy & Sell',
+    'real-estate': 'Real Estate',
+    rent: 'Rent',
+    vehicles: 'Vehicles'
+  };
+
+  const categoryName = isClassifieds
+    ? categoryParam === 'classifieds'
+      ? 'Classifieds'
+      : classifiedsCategoryMap[categoryParam] || categoryParam.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
+    : isNewsRoot
+      ? ''
+      : categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+
+  const apiCategoryName = isClassifieds
+    ? categoryParam === 'classifieds'
+      ? 'classifieds'
+      : classifiedsCategoryMap[categoryParam] || categoryName
+    : isNewsRoot
+      ? null
+      : categoryName;
 
   const [filteredNews, setFilteredNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,11 +41,13 @@ const CategoryNewsList = () => {
     const fetchNews = async () => {
       setLoading(true);
       try {
-        const filter = {
-          categoryName: categoryName,
-          type: "Main",
-          count: null
-        };
+        const filter = { count: null };
+        if (apiCategoryName) {
+          filter.categoryName = apiCategoryName;
+        }
+        if (!isClassifieds) {
+          filter.type = "Main";
+        }
         const res = await getFilteredNewsData(filter);
         setFilteredNews(res?.data?.latestNews || []);
       } catch (error) {
@@ -34,7 +60,7 @@ const CategoryNewsList = () => {
     fetchNews();
   }, [categoryName]);
 
-  const title = categoryName ? `${categoryName} News` : "All News & Views";
+  const title = categoryName ? (isClassifieds ? `${categoryName}` : `${categoryName} News`) : "All News & Views";
 
   if (loading) {
     return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>Loading...</div>;
