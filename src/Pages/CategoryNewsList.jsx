@@ -11,6 +11,14 @@ const CategoryNewsList = () => {
   const isClassifieds = pathname.startsWith('/classifieds');
   const isNewsRoot = pathname === '/news';
 
+  const routeCategoryMap = {
+    article: 'Article & Editorial',
+    obituary: 'Obituary',
+    national: 'National',
+    international: 'International',
+    kerala: 'Kerala'
+  };
+
   const classifiedsCategoryMap = {
     'buy-sell': 'Buy & Sell',
     'real-estate': 'Real Estate',
@@ -24,7 +32,7 @@ const CategoryNewsList = () => {
       : classifiedsCategoryMap[categoryParam] || categoryParam.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
     : isNewsRoot
       ? ''
-      : categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+      : routeCategoryMap[categoryParam] || (categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1));
 
   const apiCategoryName = isClassifieds
     ? categoryParam === 'classifieds'
@@ -45,7 +53,9 @@ const CategoryNewsList = () => {
         if (apiCategoryName) {
           filter.categoryName = apiCategoryName;
         }
-        if (!isClassifieds) {
+        const omitMainTypeCategories = ['article & editorial', 'obituary'];
+        const omitMainType = omitMainTypeCategories.includes(categoryName.toLowerCase()) || isClassifieds;
+        if (!omitMainType) {
           filter.type = "Main";
         }
         const res = await getFilteredNewsData(filter);
