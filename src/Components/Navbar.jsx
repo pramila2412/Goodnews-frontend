@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChevronDown } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
@@ -50,34 +50,46 @@ const navItems = [
 ];
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="container navbar-container">
         <Link to="/" className="logo notranslate">
           <span style={{ fontSize: '2rem' }}>✜</span> GoodNews
         </Link>
-        <ul className="nav-links">
-          {navItems.map((item) => (
-            <li key={item.name} className={item.active ? 'active' : ''}>
-              <Link to={item.path} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {item.name} {item.dropdown && <ChevronDown size={14} />}
-              </Link>
-              {item.dropdown && (
-                <div className="nav-dropdown-menu">
-                  {item.dropdown.map(subItem => (
-                    <Link key={subItem.name} to={subItem.path}>
-                      <span>{subItem.name}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <ThemeToggle />
-          <LanguageSwitcher />
+        
+        <div className={`nav-menu-wrapper ${isMobileMenuOpen ? 'open' : ''}`}>
+          <ul className="nav-links">
+            {navItems.map((item) => (
+              <li key={item.name} className={item.active ? 'active' : ''}>
+                <Link to={item.path} style={{ display: 'flex', alignItems: 'center', gap: '4px' }} onClick={() => setIsMobileMenuOpen(false)}>
+                  {item.name} {item.dropdown && <ChevronDown size={14} />}
+                </Link>
+                {item.dropdown && (
+                  <div className="nav-dropdown-menu">
+                    {item.dropdown.map(subItem => (
+                      <Link key={subItem.name} to={subItem.path} onClick={() => setIsMobileMenuOpen(false)}>
+                        <span>{subItem.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className="nav-actions">
+            <ThemeToggle />
+            <LanguageSwitcher />
+          </div>
         </div>
+
+        <button 
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
     </nav>
   );

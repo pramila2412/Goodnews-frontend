@@ -56,7 +56,7 @@ const Matrimony = () => {
         
         {filteredNews.length === 0 ? (
           <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-            <h3>No Records Found...</h3>
+            <h3>രേഖകളൊന്നും കണ്ടെത്തിയില്ല</h3>
           </div>
         ) : (
           <div className="news-grid-4">

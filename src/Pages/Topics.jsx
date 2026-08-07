@@ -50,8 +50,7 @@ const Topics = () => {
         
         {filteredNews.length === 0 ? (
           <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-            <h3>No Records Found for {title}...</h3>
-            <p style={{ marginTop: '1rem' }}>Check back later for exciting stories and articles in this topic.</p>
+            <h3>രേഖകളൊന്നും കണ്ടെത്തിയില്ല</h3>
           </div>
         ) : (
           <div className="news-grid-4">
